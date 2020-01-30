@@ -29,12 +29,10 @@ table.gridtable td {
 <table class="gridtable">
     <thead>
     <tr>
-	<th>ID</th>
-        <th>Name</th>
-        <th>Priority</th>
-	<th>Estimated gene count</th>
-	<th>State</th>
-	<th>Last Updated</th>
+	<th>Name</th>
+        <th>State</th>
+        <th>Date</th>
+	<th>Notes</th>
     </tr>
     </thead>
     <tbody>
@@ -44,8 +42,6 @@ table.gridtable td {
                 <td>{{row[1]}}</td>
 		<td>{{row[2]}}</td>
 		<td>{{row[3]}}</td>
-		<td>{{row[4]}}</td>
-		<td>{{row[5]}}</td>
             </tr>
         {% endfor %}
     </tbody>

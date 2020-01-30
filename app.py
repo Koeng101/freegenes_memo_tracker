@@ -12,7 +12,7 @@ cursor = conn.cursor()
 
 @app.route('/memos')
 def get_memos():
-    cmd = """SELECT m.NAME, 
+    cmd = """SELECT m.id,m.NAME, 
                m.priority, 
                m.estimated_gene_count, 
                t.state, 
@@ -29,6 +29,13 @@ def get_memos():
     cursor.execute(cmd)
     data = cursor.fetchall()
     return render_template("memos.html",value=data)
+
+@app.route('/memos/<uuid>')
+def get_memo_name(uuid):
+    cmd = "SELECT m.name,t.state,t.created_at,t.notes FROM memos as m JOIN timestamps AS t ON t.memo = m.id WHERE m.id = %s ORDER BY t.created_at DESC"
+    cursor.execute(cmd, (uuid,))
+    data = cursor.fetchall()
+    return render_template("memo_times.html",value=data)
 
 if __name__ == '__main__':
     app.run(debug=True)
