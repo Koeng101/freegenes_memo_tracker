@@ -1,0 +1,62 @@
+<html>
+<head>
+<style type="text/css">
+table.gridtable {
+	font-family: verdana,arial,sans-serif;
+	font-size:11px;
+	color:#333333;
+	border-width: 1px;
+	border-color: #666666;
+	border-collapse: collapse;
+}
+table.gridtable th {
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #666666;
+	background-color: #dedede;
+}
+table.gridtable td {
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #666666;
+	background-color: #ffffff;
+}
+</style>
+</head>
+<body>
+<table class="gridtable">
+    <thead>
+    <tr>
+	<th>ID</th>
+        <th>Name</th>
+        <th>Description</th>
+	<th>Justification</th>
+	<th>Priority</th>
+	<th>Urgency</th>
+	<th>Estimated Gene count</th>
+	<th>Memo Link</th>
+	<th>Synmemo Link</th>
+	<th>DOI</th>
+    </tr>
+    </thead>
+    <tbody>
+        {% for row in value %} 
+            <tr>
+                <td>{{row[0]}}</td>
+                <td>{{row[1]}}</td>
+		<td>{{row[2]}}</td>
+		<td>{{row[3]}}</td>
+		<td>{{row[4]}}</td>
+		<td>{{row[5]}}</td>
+		<td>{{row[6]}}</td>
+		<td>{{row[7]}}</td>
+		<td>{{row[8]}}</td>
+		<td>{{row[9]}}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</body>
+</html>

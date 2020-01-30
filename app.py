@@ -30,6 +30,13 @@ def get_memos():
     data = cursor.fetchall()
     return render_template("memos.html",value=data)
 
+@app.route('/memos_full')
+def memos_full():
+    cmd = "SELECT id,name,short_description,justification,priority,urgency,estimated_gene_count,memo_link,synmemo_link,doi FROM memos ORDER BY priority DESC"
+    cursor.execute(cmd)
+    data = cursor.fetchall()
+    return render_template("memos_full.html",value=data)
+
 @app.route('/memos/<uuid>')
 def get_memo_name(uuid):
     cmd = "SELECT m.name,t.state,t.created_at,t.notes FROM memos as m JOIN timestamps AS t ON t.memo = m.id WHERE m.id = %s ORDER BY t.created_at DESC"
