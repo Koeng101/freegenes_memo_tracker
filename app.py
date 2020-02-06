@@ -16,20 +16,30 @@ cursor = conn.cursor()
 
 @app.route('/')
 def index():
-    cmd = """SELECT m.name, 
-               m.priority, 
-               m.estimated_gene_count, 
-               t.state, 
-               t.created_at AS last_updated 
-        FROM   memos AS m 
-               JOIN (SELECT DISTINCT ON (memo) memo, 
-                                               created_at, 
-                                               state 
-                     FROM   timestamps 
-                     ORDER  BY memo, 
-                               created_at DESC) AS t 
-                 ON t.memo = m.id 
-        ORDER  BY last_updated DESC """
+    cmd = """SELECT m.id, 
+           m.name, 
+           mal.author, 
+           mal.lab, 
+           m.priority, 
+           m.estimated_gene_count, 
+           t.state, 
+           t.created_at AS last_updated 
+    FROM   memos AS m 
+           JOIN (SELECT DISTINCT ON (memo) memo, 
+                                           created_at, 
+                                           state 
+                 FROM   timestamps 
+                 ORDER  BY memo, 
+                           created_at DESC) AS t 
+             ON t.memo = m.id 
+           JOIN (SELECT DISTINCT ON (memo) memo, 
+                                           author, 
+                                           lab 
+                 FROM   memos_authors_labs 
+                 ORDER  BY memo, 
+                           position ASC) AS mal 
+             ON mal.memo = m.id 
+    ORDER  BY last_updated DESC """
     cursor.execute(cmd)
     data = cursor.fetchall()
     return render_template("index.html",value=data)
@@ -37,6 +47,16 @@ def index():
 @app.route('/faq')
 def faq():
     return render_template("faq.html")
+
+@app.route('/memo/<uuid>')
+def memo_table(uuid):
+    cursor.execute("SELECT name,short_description,justification,estimated_gene_count,priority,urgency,memo_link,synmemo_link,doi FROM memos WHERE id=%s",(uuid,))
+    data = cursor.fetchone()
+    cursor.execute("SELECT author,lab,position FROM memos_authors_labs WHERE memo=%s ORDER BY position",(uuid,))
+    authors = cursor.fetchall()
+    cursor.execute("SELECT state,notes,created_at FROM timestamps WHERE memo=%s ORDER BY created_at DESC",(uuid,))
+    table_data = cursor.fetchall()
+    return render_template("memo.html",memo=data,authors=authors,state_table=table_data)
 
 #@app.route('/memos_full')
 #def memos_full():

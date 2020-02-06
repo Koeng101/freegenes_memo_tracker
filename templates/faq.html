@@ -1,7 +1,7 @@
 {% extends 'bootstrap/base.html' %}
 
 {% block title %}
-        FreeGenes Memos
+        FreeGenes FAQ
 {% endblock %}
 
 {% block navbar %}
@@ -15,7 +15,7 @@ avbar-collapse-1" aria-expanded="false">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{{ url_for('index') }}">FreeGenes Memos</a>
+                <a class="navbar-brand" href="{{ url_for('index') }}">FreeGenes Dashboard</a>
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
@@ -28,10 +28,60 @@ avbar-collapse-1" aria-expanded="false">
 {% endblock %}
 
 {% block content %}
-<h3> What is a FreeGenes Memo? </h3>
-<p> It's certainly something. </p>
-<h3> What stages does a FreeGenes Memo go through to production? </h3>
-<p> It's certainly more than one. </p>
+<h1>FAQ</h1>
+<p><a href="{{ url_for('index') }}">&lt;-- Go Back</a></p>
+<h3> What is a FreeGenes Project? What is a Memo? What is a SynMemo? </h3>
+<p><i> Note: Keywords described here will be capitalized from here on for clarity</i></p>
+<ol>
+    <li><b>Project</b>: A FreeGenes Project is an objective for the FreeGenes Project, usually in the form of a collection of genes, along with people who are interested in achieving that objective. Projects in FreeGenes go through several stages until they are "shipped", usually in the form of DNA distributions going out to users and distributors. FreeGenes Projects have a smaller scope than projects that use FreeGenes: For example, the OpenEnzyme Project may have two FreeGenes Projects associated with it, OpenEnzyme #1 and OpenEnzyme #2.</li>
+    <li><b>Memo</b>: A FreeGenes Memo is a 1-2 page paper describing a possible FreeGenes Project. A normal FreeGenes memo contains a general introduction to a problem, a specific introduction to a Project aiming at solving that problem, a general and brief description of what the Project will do or synthesize (along with an estimated gene count), the people associated with accomplishing that Project, and the IP landscape that may prevent the Project from being produced.</li>
+    <li><b>SynMemo</b>: A FreeGenes SynMemo includes two different documents - a 1-2 page paper describing a FreeGenes Project, and a spreadsheet including specific data about genes included in a FreeGenes Project. The 1-2 page paper is mainly aimed at justifying the synthesis of genes in the spreadsheet in a simple and easy-to-read way. The spreadsheet, on the other hand, is the actual source of sequence data for a FreeGenes Project</li>
+    <li><b>Distribution</b>: A FreeGenes Project usually reaches its conclusion when a Distribution is produced for that Project. A Distribution is a collection of physical samples, usually E.coli glycerol stocks with clonal plasmid, that can be physically shipped. While there is usually a Distribution for each Project, there may be Distributions that include multiple Projects.</li>
+</ol>
+<h3> What stages does a FreeGenes Project go through until it gets to distribution? </h3>
+<p> A FreeGenes Project goes through 3 main stages: The Memo stage, the SynMemo stage, and the Production stage. These 3 stages each split into a couple different steps.</p>
+<table id=stages class="table table-hover table-bordered table-sm">
+    <tr>
+        <th>memo_submitted</th>
+        <td>The initial state of a FreeGenes Project once a Memo for a Project has been submitted to FreeGenes</td>
+    </tr>
+    <tr>
+        <th>memo_edits_required</th>
+        <td>If the FreeGenes team requires edits to a Memo, the Memo enters an editing step, where we slow down and improve a Memo until it is acceptable</td>
+    </tr>
+    <tr>
+        <th>memo_dropped</th>
+        <td>If the FreeGenes team cannot take on a Project or all the members of a Project choose to abandon it, the Memo is dropped</td>
+    </tr>
+    <tr>
+        <th>synmemo_baking</th>
+        <td>If the FreeGenes team looks at the Memo and it is acceptable, then the Project progresses to the SynMemo stage. In this stage, the FreeGenes designer lead and the members of a Project work together to prepare a SynMemo</td>
+    </tr>
+    <tr>
+	<th>synmemo_submitted</th>
+        <td>Once the initial SynMemo looks complete to the FreeGenes designer lead and the Project members, it is submitted for review by the FreeGenes team</td>
+    </tr>
+    <tr>
+        <th>synmemo_edits_required</th>
+        <td>If the FreeGenes team requires edits to a SynMemo, the SynMemo enters an editing step, where we slow down and improve a SynMemo until it is acceptable</td>
+    </tr>
+    <tr>
+        <th>synmemo_dropped</th>
+        <td>If the FreeGenes team can no longer take on a Project, if all the members of a Project choose to abandon it, or if direct and strong intellectual property rights are discovered to all components in a SynMemo, the SynMemo is dropped</td>
+    </tr>
+    <tr>
+        <th>synthesis_submitted</th>
+        <td>Once a SynMemo is accepted, it is sent to Twist for clonal synthesis</td>
+    </tr>
+    <tr>
+        <th>distribution_baking</th>
+        <td>Once FreeGenes have received clonal stocks from Twist, there is a period of time necessary to build the Distributions that are shipped out to users</td>
+    </tr>
+    <tr>
+        <th>distribution_shipping</th>
+        <td>The final state of a FreeGenes Project, where DNA is actively shipped out to users and FreeGenes distributors. In addition to physical materials, a DOI identifier is created for the entire project for future references</td>
+    </tr>
+
 {% endblock %}
 
 

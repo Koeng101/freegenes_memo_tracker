@@ -1,0 +1,107 @@
+{% extends 'bootstrap/base.html' %}
+
+{% block title %}
+	FreeGenes Memos
+{% endblock %}
+
+{% block navbar %}
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{{ url_for('index') }}">FreeGenes Dashboard</a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="{{ url_for('index') }}">Home</a></li>
+		    <li><a href="{{ url_for('faq') }}">FAQ</a></li>
+                
+            </div>
+        </div>
+    </nav>
+{% endblock %}
+
+{% block content %}
+<h1> {{memo[0]}} </h1>
+<p><a href="{{ url_for('index') }}">&lt;-- Go Back</a></p>
+<h3> Quick Facts </h3>
+<table id=memo_facts class="table table-hover table-bordered table-sm">
+    <tr>
+	<th>Description</th>
+	<td>{{memo[1]}}</td>
+    </tr>
+    <tr>
+	<th>Justification</th>
+	<td>{{memo[2]}}</td>
+    </tr>
+    <tr>
+	<th>Estimated Gene count</th>
+	<td>{{memo[3]}}</td>
+    </tr>
+    <tr>
+	<th>Priority</th>
+	<td>{{memo[4]}}</td>
+    </tr>
+    <tr>
+	<th>Urgency</th>
+	<td>{{memo[5]}}</td>
+    </tr>
+    <!-- Should probably format below links better in future -->
+    <tr>
+	<th>Memo Link</th>
+	<td><a href={{memo[6]}}>{{memo[6] or ''}}</a></td>
+    </tr>
+    <tr>
+        <th>SynMemo Link</th>
+	<td><a href={{memo[7]}}>{{memo[7] or ''}}</a></td>
+    </tr>
+    <tr>
+	<th>DOI Link</th>
+	<td><a href={{memo[8]}}>{{memo[8] or ''}}</a></td>
+    </tr>
+</table>
+<h3> Project Authors </h3>
+<table id=authors class="table table-hover table-bordered table-sm">
+    <thead>
+    <tr>
+	<th>Author</th>
+	<th>Lab</th>
+	<th>Position</th>
+    </tr>
+    </thead>
+    <tbody>
+	{% for row in authors %}
+	    <tr>
+                <td>{{row[0]}}</td>
+                <td>{{row[1]}}</td>
+                <td>{{row[2]}}</td>
+	    </tr>
+	{% endfor %}
+    </tbody>
+</table>
+
+<h3> History </h3>
+<table id=memo_state class="table table-hover table-bordered table-sm">
+    <thead>
+    <tr>
+        <th>State</th>
+        <th>Notes</th>
+        <th>Update Time</th>
+    </tr>
+    </thead>
+    <tbody>
+        {% for row in state_table %}
+            <tr>
+		<td>{{row[0]}}</td>
+		<td>{{row[1]}}</td>
+		<td>{{row[2]}}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %} 
